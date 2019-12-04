@@ -13,3 +13,27 @@ Versión: .NET Standard 2.0
   }
 ```
 
+# Startup.cs
+```
+public void ConfigureServices(IServiceCollection services)
+{
+
+    services.AddJwtCustomized();
+    services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+    services.Configure<JwtOptions>(Configuration.GetSection("jwt"));
+ }
+```
+
+# In the controller
+```
+public AuthController(IOptionsSnapshot<JwtOptions> jwtOption)
+{
+    this.jwtOption = jwtOption.Value;
+}
+
+.
+.
+.
+
+Response.Headers.Add("Authorization", "Bearer " + JwtToken.Create(jwtOption));
+```
