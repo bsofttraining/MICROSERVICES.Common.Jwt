@@ -10,14 +10,13 @@ Versión: .NET Standard 2.0
     "audience": "web",
     "key": "CLave#12548MIentrasMas45566Mejor____%%%dddd",
     "expiration": "30"
-  }
+}
 ```
 
 # Startup.cs
 ```
 public void ConfigureServices(IServiceCollection services)
 {
-
     services.AddJwtCustomized();
     services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
     services.Configure<JwtOptions>(Configuration.GetSection("jwt"));
@@ -26,6 +25,7 @@ public void ConfigureServices(IServiceCollection services)
 
 # In the controller
 ```
+private readonly JwtOptions jwtOption;
 public AuthController(IOptionsSnapshot<JwtOptions> jwtOption)
 {
     this.jwtOption = jwtOption.Value;
